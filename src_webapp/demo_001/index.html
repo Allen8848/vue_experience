@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>vue-简单的增删改查</title>
+  <link rel="stylesheet" href="./index.css">
+
+</head>
+
+<body>
+  <div class="app" id="app" v-cloak>
+
+
+    <!-- -------------------------------v-model -->
+    <div class="box">
+      <h1>v-model</h1>
+      <div class="item">
+        输入：<input type="text" v-model="obj.a">
+      </div>
+      <div class="item">
+        显示：{{obj.a=="admin"}}
+      </div>
+      <div class="item">
+        一次绑定：{{*obj.a}}
+      </div>
+      <div class="item">
+        识别HTML：{{{obj.a}}}
+      </div>
+
+    </div>
+
+    <!-- --------------------------------------------v-for -->
+    <div class="box">
+      <h1>v-for</h1>
+
+      <h3>对象的遍历:</h3>
+      <div class="item" v-for='(k,v) in obj'>
+        obj[ {{k}} ]:{{v}}
+      </div>
+
+      <h3>数组的遍历:</h3>
+      <div class="item" v-for='ele in arr' track-by='$index'>
+        index：{{$index}} ; ele：{{ele}}
+      </div>
+    </div>
+
+
+    <!-- ---------------------------------------------v-show -->
+    <div class="box">
+      <h1>v-show</h1>
+      <div class="item">
+        <button v-on:click="key = !key">btn</button>
+      </div>
+      <div class="item">
+        <button v-on:click="btn_ck()">btn</button>
+      </div>
+
+      <div class="item" v-show=key>
+        显示的信息
+      </div>
+    </div>
+
+
+    <!-- -----------------------------------------------案例 -->
+
+    <div class="box">
+      <h1>Todolist</h1>
+      <div class="item">
+        <button v-on:click="_layer_show()">add</button>
+      </div>
+      <div class="item" v-for="ele in list" v-show="list.length!=0">
+        {{$index+1}} {{ele.info}} <button v-on:click="_layer_upd(ele.id)">upd</button> <button v-on:click="_layer_del(ele.id)">del</button>
+      </div>
+      <div class="item" v-show="list.length==0">
+        当前列表没有数据
+      </div>
+
+
+    </div>
+
+
+    <!-- layer -->
+    <div class="layer" v-show="one.key">
+      <div class="layer_box">
+        <div class="close" v-on:click="_layer_close()">X</div>
+        <div class="main">
+          <input type="text" id="name" v-model="one.info">
+        </div>
+        <div class="yes" v-on:click="_layer_sure()">save :)</div>
+      </div>
+    </div>
+
+  </div>
+
+
+
+
+</body>
+<!-- vue -->
+<script src="../script/lib/vue/vue.min.js" type="text/javascript"></script>
+<!-- test -->
+<script src="./test_data.js" type="text/javascript"></script>
+<!-- main -->
+<script src="./index.js" type="text/javascript"></script>
+
+</html>
